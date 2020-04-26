@@ -4,8 +4,9 @@
     <el-form :model="form" style="width:1000px"   ref="form">
         <el-form-item label="数据类别" prop="type">
       <select v-model="form.type" >
-          <option v-for="type in types"   @click="getHandle('form')">{{type}}</option>
+          <option v-for="type in types" >{{type}}</option>
       </select>
+      <el-button size="small" type="primary" @click="getHandle">确认</el-button>
     </el-form-item>
     </el-form>
     <div class='main'>
@@ -68,10 +69,10 @@ export default {
 // 				})
 //   },
   methods: {
-      getform(form){
+      getHandle(form){
+          console.log('change');
           this.currentPage = 1
-          getList()
-            this.reload();
+            this.getList();
       },
         getList () {
                 let params = {
