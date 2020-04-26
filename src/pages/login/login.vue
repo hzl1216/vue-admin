@@ -124,7 +124,9 @@
         var vm = this;
         this.instance.userLogin(data, headers).then(res => {
           console.log(res.data)
-          let token = res.data.id;
+          let user = res.data.userId;
+          let token = res.data.sessionId;
+          this.$store.commit('SET_USER', user);
           this.$store.commit('SET_TOKEN', token);
           this.$router.replace('home');
         }).catch(function (error) {

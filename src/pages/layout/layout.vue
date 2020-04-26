@@ -119,7 +119,7 @@
             icon: 'el-icon-adm-organization',
             children: [
               {path: '/data/insert', title: '添加数据'},
-              {path: '/data/update', title: '更新数据'},
+              // {path: '/data/update', title: '更新数据'},
               {path: '/data/delete', title: '删除数据'}
             ]
           },

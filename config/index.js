@@ -33,7 +33,7 @@ module.exports = {
     proxyTable: {
       '/account': {
                       target: 'http://202.38.81.87:3001',
-                      // target: 'http:/localhost:3001',
+                      // target: 'http://localhost:3001',
                       changeOrigin: true,
                       pathRewrite: {
                         '^/account': '/individual-center/v1/account'

@@ -63,8 +63,11 @@ export default {
   getClinicals(params) {
     return instance.get('/object/clinical',params);
   },
-  getTissues() {
-    return instance.get('/object/tissue');
+  getTissues(params) {
+    return instance.get('/object/tissue',params);
+  },
+  getDatas(params) {
+    return instance.get('/object/data',params);
   },
   deleteIndividual(id) {
     return instance.delete('/object/individual/'+id);
@@ -74,5 +77,8 @@ export default {
   },
   deleteClinical(id) {
     return instance.delete('/object/clinical/'+id);
+  },
+  deleteData(params) {
+    return instance.delete('/object/data/',params);
   },
 };

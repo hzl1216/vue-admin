@@ -6,8 +6,14 @@
     <el-form-item label="tissueId" prop="tissueId">
       <el-input v-model="form.tissueId" placeholder="请输入tissueId" style="width:300px"></el-input>
     </el-form-item>
-    <el-form-item label="type" prop="type">
+    <!-- <el-form-item label="type" prop="type">
       <el-input v-model="form.type" placeholder="请输入type" style="width:300px"></el-input>
+    </el-form-item> -->
+    <el-form-item label="type" prop="type">
+      <select v-model="form.type" >
+          <option v-for="type in types" >{{type}}</option>
+      </select>
+            <p>所选择：{{form.type}}</p>
     </el-form-item>
     <el-form-item label="raw文件地址" prop="rawurl">
       <el-input v-model="form.rawurl" placeholder="请输入rawurl" style="width:300px"></el-input>
@@ -44,6 +50,9 @@ import axios from 'axios'
 export default {
   data() {
     return {
+      types: [
+        'wes', 'rna', 'phosphoprotein', 'protein'
+      ],
       limitNum: 1,
       formLabelWidth: '80px',
       fileList: [],
@@ -52,7 +61,7 @@ export default {
           rawurl: '',
           tissueId: '',
           Id: '',
-          type: '',
+          type: 'wes',
         },
         rules: {
           rawurl: [
@@ -65,12 +74,15 @@ export default {
             { required: true, message: 'Id不能为空', trigger: 'blur' }
           ],
           type: [
-            { required: true, message: 'typr不能为空', trigger: 'blur' }
+            { required: true, message: 'type不能为空', trigger: 'blur' }
           ],
         }
     }
   },
   methods: {
+    selected: function(type) {
+      this.type = type
+    },
     // 文件超出个数限制时的钩子
     exceedFile(files, fileList) {
       this.$notify.warning({
@@ -156,11 +168,19 @@ export default {
           rawurl: this.form.rawurl,
           url: this.filepath
         };
-        console.log(data)
+        console.log(data);
+        let vm = this;
         this.instance.insertDatas(data,  {'Content-Type': 'application/x-www-form-urlencoded'}).then(res => {
+          this.$notify.success({
+            title: '成功',
+            message: `添加成功`
+          });
           console.log(res);
         }).catch(function (error) {
-          console.log(error);
+          vm.$notify.error({
+            title: error.response.data.error.id,
+            message: error.response.data.error.message
+        });
         });
     }
   }
