@@ -114,7 +114,7 @@ export default {
                 })
         });
     },
-     mounted() {
+     created() {
             //请求第一页数据
             this.getList()
         } 

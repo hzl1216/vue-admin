@@ -40,18 +40,11 @@ export default {
             items: []
       }
   },
-   mounted() {
+   created() {
             //请求第一页数据
             this.getList()
         } ,
 
-//   created () {
-//       //this.$reqs就访问到了main.js中绑定的axios
-// 				this.instance.getIndividuals().then((res)=>{ 
-// 					//成功
-//                     this.items = res.data;
-// 				})
-//   },
   methods: {
         getList () {
                 let params = {
