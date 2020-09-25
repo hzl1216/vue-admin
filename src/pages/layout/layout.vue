@@ -124,6 +124,37 @@
             ]
           },
           {
+            path: '/drugs',
+            title: '药物管理',
+            icon: 'el-icon-adm-form',
+            children: [
+              {path: '/drugs/insert', title: '添加药物'},
+              {path: '/drugs/update', title: '更新药物'},
+              {path: '/drugs/delete', title: '删除药物'}
+            ]
+          },
+          {
+            path: '/models',
+            title: '模型管理',
+            icon: 'el-icon-adm-form',
+            children: [
+              {path: '/models/insert', title: '添加模型'},
+              {path: '/models/update', title: '更新模型'},
+              {path: '/models/delete', title: '删除模型'}
+            ]
+          },
+          {
+            path: '/tasks',
+            title: '任务管理',
+            icon: 'el-icon-adm-form',
+            children: [
+              {path: '/tasks/insert', title: '添加任务'},
+              {path: '/tasks/delete', title: '管理任务'}
+            ]
+          },
+
+
+          {
             path: '/access/index',
             title: '权限管理',
             icon: 'el-icon-adm-data'

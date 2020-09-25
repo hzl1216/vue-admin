@@ -42,6 +42,21 @@ export default {
       headers: headers
     });
   },
+  insertDrugs(data, headers) {
+    return instance.post('/object/drug', qs.stringify(data),  {
+      headers: headers
+    });
+  },
+  insertModels(data, headers) {
+    return instance.post('/object/model', qs.stringify(data),  {
+      headers: headers
+    });
+  },
+  insertTasks(data, headers) {
+    return instance.post('/object/task', qs.stringify(data),  {
+      headers: headers
+    });
+  },
   updateClinicals(data, headers) {
     return instance.post('/object/clinical/update', qs.stringify(data),  {
       headers: headers
@@ -57,6 +72,21 @@ export default {
       headers: headers
     });
   },
+  updateDrugs(data, headers) {
+    return instance.post('/object/drug/update', qs.stringify(data),  {
+      headers: headers
+    });
+  },
+  updateModels(data, headers) {
+    return instance.post('/object/model/update', qs.stringify(data),  {
+      headers: headers
+    });
+  },
+  updateStatus(data, headers) {
+    return instance.post('/object/task/update', qs.stringify(data),  {
+      headers: headers
+    });
+  },
   getIndividuals(params) {
     return instance.get('/object/individual',params);
   },
@@ -69,6 +99,15 @@ export default {
   getDatas(params) {
     return instance.get('/object/data',params);
   },
+  getDrugs(params) {
+    return instance.get('/object/drug',params);
+  },
+  getModels(params) {
+    return instance.get('/object/model',params);
+  },
+  getTasks(params) {
+    return instance.get('/object/task',params);
+  },
   deleteIndividual(id) {
     return instance.delete('/object/individual/'+id);
   },
@@ -80,5 +119,8 @@ export default {
   },
   deleteData(params) {
     return instance.delete('/object/data/',params);
+  },
+  deleteDrug(id) {
+    return instance.delete('/object/drug/'+id);
   },
 };

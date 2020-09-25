@@ -10,7 +10,7 @@
           :model="form"
           :rules="rules">
           <el-form-item prop="username">
-            <el-input v-model="form.username" placeholder="请输入账号">
+            <el-input v-model="form.username" placeholder="请输入邮箱">
               <i slot="prefix" class="el-input__icon el-icon-adm-user" style="font-size: 18px;"></i>
             </el-input>
           </el-form-item>
@@ -33,9 +33,13 @@
               </div>
             </div>
           </el-form-item>
+
+
           <el-form-item style="margin-bottom: 0;">
-            <el-col :span="10" :offset="14">
-              <el-form-item>
+
+           
+              <el-row>
+
                 <el-button
                   type="primary"
                   class="login-btn"
@@ -43,8 +47,9 @@
                   @click="loginHandle('loginForm')">
                   登陆系统
                 </el-button>
-              </el-form-item>
-            </el-col>
+
+              </el-row>
+             
           </el-form-item>
         </el-form>
       </div>
@@ -79,7 +84,7 @@
         },
         rules: {
           username: [
-            { required: true, message: '账号不能为空', trigger: 'blur' }
+            { required: true, message: '邮箱不能为空', trigger: 'blur' }
           ],
           password: [
             { required: true, message: '密码不能为空', trigger: 'blur' }

@@ -18,6 +18,8 @@ export const loginRouter = {
   component: () => import('src/pages/login/login')
 };
 
+
+
 // 错误页面
 export const errorRouter = {
   path: '/error/:code',
@@ -160,6 +162,93 @@ export const appRouter = [
       }
     ]
   },
+
+  {
+    path: '/drugs',
+    name: 'drugs',
+    title: '药物管理',
+    meta: {
+      requireAuth: true
+    },
+    component: Layout,
+    children: [
+      {
+        path: 'insert',
+        name: 'insert',
+        title: '添加药物',
+        component: () => import('src/pages/drugs/insert')
+      },
+      {
+        path: 'update',
+        name: 'update',
+        title: '更新药物',
+        component: () => import('src/pages/drugs/update')
+      },
+      {
+        path: 'delete',
+        name: 'delete',
+        title: '删除药物',
+        component: () => import('src/pages/drugs/delete')
+      }
+    ]
+  },
+  
+  {
+    path: '/models',
+    name: 'models',
+    title: '模型管理',
+    meta: {
+      requireAuth: true
+    },
+    component: Layout,
+    children: [
+      {
+        path: 'insert',
+        name: 'insert',
+        title: '添加模型',
+        component: () => import('src/pages/models/insert')
+      },
+      {
+        path: 'update',
+        name: 'update',
+        title: '更新模型',
+        component: () => import('src/pages/models/update')
+      },
+      {
+        path: 'delete',
+        name: 'delete',
+        title: '删除模型',
+        component: () => import('src/pages/models/delete')
+      }
+    ]
+  },
+  {
+    path: '/tasks',
+    name: 'tasks',
+    title: '任务管理',
+    meta: {
+      requireAuth: true
+    },
+    component: Layout,
+    children: [
+      {
+        path: 'insert',
+        name: 'insert',
+        title: '添加任务',
+        component: () => import('src/pages/tasks/insert')
+      },
+  
+      {
+        path: 'delete',
+        name: 'delete',
+        title: '删除任务',
+        component: () => import('src/pages/tasks/delete')
+      }
+    ]
+  },
+
+
+
   {
     path: '/form',
     name: 'form',

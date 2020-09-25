@@ -32,7 +32,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/account': {
-                      target: 'http://202.38.81.87:3001',
+                      target: 'http://0.0.0.0:3001',
                       // target: 'http://localhost:3001',
                       changeOrigin: true,
                       pathRewrite: {
@@ -41,7 +41,7 @@ module.exports = {
                     },
         '/object': {
           //               target: 'http://localhost:3002',
-                        target: 'http://202.38.81.87:3002',
+                        target: 'http://0.0.0.0:3002',
                         changeOrigin: true,
                         pathRewrite: {
                           '^/object': '/individual-center/v1/object'
