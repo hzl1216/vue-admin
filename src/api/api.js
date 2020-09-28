@@ -123,4 +123,7 @@ export default {
   deleteDrug(id) {
     return instance.delete('/object/drug/'+id);
   },
+  deleteModel(id) {
+    return instance.delete('/object/model/'+id);
+  },
 };
