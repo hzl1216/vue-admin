@@ -11,6 +11,7 @@ import 'normalize.css';
 import 'animate.css';
 
 import ElementUI from 'element-ui';
+import 'element-theme-chalk';
 import 'element-ui/lib/theme-chalk/index.css';
 
 // 引入echarts主模块（基础模块）

@@ -1,5 +1,5 @@
 <template>
-  <el-form :model="form" style="width:1000px" :rules="rules"  ref="form">
+  <el-form :model="form" :inline="true" style="width:1000px" :rules="rules"  ref="form">
     <el-form-item label="modelname" prop="modelname">
       <el-input v-model="form.modelname" placeholder="请输入modelname" style="width:300px"></el-input>
     </el-form-item>
@@ -36,10 +36,39 @@
       <el-button size="small" type="primary" @click="uploadFile">立即上传</el-button>
       <el-button size="small">取消</el-button>
     </el-form-item>
+    <el-row v-for="(item,index) in form.inputparams" :key="index" >
+      <el-form-item label="输入参数名" :prop="'inputparams.' + index + '.name'" :rules="[{ required: true, message: '参数名不能为空',trigger: 'change'},{max: 32, message: '不超过32个字符', trigger: 'change'}]">
+        <el-input v-model="item.name" placeholder="请输入参数名" style="width:200px"> </el-input>
+      </el-form-item>
+      <el-form-item label="输入类型" :prop="'inputparams.' + index + '.type'" :rules="[{ required: true, message: '类型不能为空',trigger: 'change'}]">
+        <select v-model="item.type" >
+          <option v-for="type in options" >{{type}}</option>
+        </select>
+      </el-form-item>
+      <el-form-item label="输入缺省值" :prop="'inputparams.' + index + '.default'" :rules="[{ required: true, message: '缺省值不能为空',trigger: 'change'},{max: 32, message: '不超过32个字符', trigger: 'change'}]">
+        <el-input v-model="item.default" placeholder="请输入缺省值" style="width:200px"> </el-input>
+      </el-form-item>
+      <el-button type="danger" v-if="form.inputparams.length > 1" size="medium" @click="removeRow(index)">删除</el-button>
+    </el-row>
+    <el-button type="primary" size="medium" @click="addRow">新增输入参数</el-button>
+
+    <el-row v-for="(item,index) in form.outputparams" :key="index+1" >
+      <el-form-item label="输出文件" :prop="'outputparams.' + index + '.name'" :rules="[{ required: true, message: '输出文件不能为空',trigger: 'change'},{max: 32, message: '不超过32个字符', trigger: 'change'}]">
+        <el-input v-model="item.name" placeholder="请输入输出文件" style="width:200px"> </el-input>
+      </el-form-item>
+      <el-form-item label="输出文件名" :prop="'outputparams.' + index + '.value'" >
+        <el-input v-model="item.value" placeholder="请输入输出文件名" style="width:200px"> </el-input>
+      </el-form-item>
+      <el-button type="danger" v-if="form.outputparams.length > 1" size="medium" @click="removeRow2(index)">删除</el-button>
+    </el-row>
+    <el-button type="primary" size="medium" @click="addRow2">新增输出参数</el-button>
+
+    <el-row>
     <el-form-item>
       <el-button size="small" type="primary" @click="updateHandle('form')">提交模型</el-button>
       <el-button size="small">取消</el-button>
     </el-form-item>
+    </el-row>
   </el-form>
 </template>
 
@@ -48,6 +77,9 @@ import axios from 'axios'
 export default {
   data() {
     return {
+      options: [
+        '文件', '数值'
+      ],
       types: [
         'R', 'python'
       ],
@@ -57,9 +89,22 @@ export default {
       form: {
           file: '',
           modelname: '',
-          description: '',
-          
+          description: '',          
           type: 'R',
+          inputparams:[
+            {
+              name:'',
+              type:'',
+              default:''
+            }
+          ],
+          outputparams:[
+            {
+              name:'',              
+              value:''
+            }
+          ],
+
         },
         rules: {
           description: [
@@ -158,11 +203,12 @@ export default {
         return;
         }
         const data = {
-          
           type: this.form.type,
           modelname: this.form.modelname,
           modelurl: this.filepath,
-          description: this.form.description
+          description: this.form.description,
+          inputparams: JSON.stringify( this.form.inputparams ),
+          outparams: JSON.stringify(this.form.outputparams)
         };
         console.log(data);
         let vm = this;
@@ -178,6 +224,28 @@ export default {
             message: error.response.data.error.message
         });
         });
+    },
+    // 添加
+    addRow() {
+      this.form.inputparams.push({
+        name: "",
+        type: "",
+        default: ""
+      });
+    },
+    removeRow(index) {
+      this.form.inputparams.splice(index, 1);
+    },
+    
+    // 添加
+    addRow2() {
+      this.form.outputparams.push({
+        name: "",
+        value: ""
+      });
+    },
+    removeRow2(index) {
+      this.form.outputparams.splice(index, 1);
     }
   }
 }

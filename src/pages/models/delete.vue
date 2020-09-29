@@ -66,12 +66,12 @@ export default {
    
     // 文件超出个数限制时的钩子
     deleteobject(item) {
-        this.$confirm('此操作将删除该药物和相关靶点数据, 是否继续?', '提示', {
+        this.$confirm('此操作将删除该模型, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-        this.instance.deleteModel(item.objectId).then((res)=>{ 
+        this.instance.deleteModel(item.id).then((res)=>{ 
 					//成功
                     this.reload();
                 })
