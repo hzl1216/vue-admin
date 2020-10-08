@@ -135,6 +135,7 @@ export default {
   },
   created() {
             //请求第一页数据
+            this.formData = new FormData()
             this.getList()
         } ,
   
@@ -165,7 +166,9 @@ export default {
     fileChange(file, fileList) {
       console.log('change')
       console.log(file)
+      
       this.form.file = file.raw
+      this.formData.append('file', file.raw)
       console.log(this.form.file)
       console.log(fileList)
     },
@@ -211,7 +214,6 @@ export default {
         });
       },
     uploadFile() {
-      let formData = new FormData()
       if (!this.form.file) {
         this.$notify.warning({
           title: '警告',
@@ -219,8 +221,8 @@ export default {
         });
         return;
       }
-      formData.append('file', this.form.file)
-      this.instance.upload(formData,  { "Content-Type": "multipart/form-data" }).then(res => {
+
+      this.instance.upload(this.formData,  { "Content-Type": "multipart/form-data" }).then(res => {
           this.filepath = res.data.path
           console.log(res);
           this.$notify.success({
