@@ -8,10 +8,56 @@
     </el-form-item>
     
     <el-form-item label="modelname" prop="modelname">
-      <select v-model="form.modelname" >
+      <select v-model="form.modelname" @change="selectFn($event)">
           <option v-for="modelname in modelnames" >{{modelname.name}}</option>
       </select>
-            <p>所选择：{{form.modelname.name}}</p>
+            <p>所选择：{{form.modelname}}</p>
+    </el-form-item>
+
+    <el-form-item label="inputparams" prop="inputparams">
+    <el-table :data="form.inputparams" style="width: 100%">
+      <el-table-column prop="type" label="类型" width="180">
+        <template slot-scope="scope">
+          <el-input v-if="0" v-model="scope.row.type"></el-input>
+          <span v-else>{{scope.row.type}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="default" label="值" width="180">
+        <template slot-scope="scope">
+    <el-input v-if="1" v-model="scope.row.default"></el-input>
+    <span v-else>{{scope.row.default}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="name" label="参数名" >
+        <template slot-scope="scope">
+    <el-input v-if="0" v-model="scope.row.name"></el-input>
+    <span v-else>{{scope.row.name}}</span>
+        </template>
+      </el-table-column>
+    </el-table>
+    </el-form-item>
+
+    <el-form-item label="outparams" prop="outparams">
+    <el-table :data="form.outparams" style="width: 100%">
+      <el-table-column prop="type" label="类型" width="180">
+        <template slot-scope="scope">
+          <el-input v-if="0" v-model="scope.row.type"></el-input>
+          <span v-else>{{scope.row.type}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="default" label="值" width="180">
+        <template slot-scope="scope">
+    <el-input v-if="1" v-model="scope.row.default"></el-input>
+    <span v-else>{{scope.row.default}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="name" label="参数名" >
+        <template slot-scope="scope">
+    <el-input v-if="0" v-model="scope.row.name"></el-input>
+    <span v-else>{{scope.row.name}}</span>
+        </template>
+      </el-table-column>
+    </el-table>
     </el-form-item>
 
 
@@ -70,6 +116,8 @@ export default {
           description: '',
           modelname:'',
           type: '.csv',
+          inputparams:[],
+          outparams:[],
         },
         rules: {
           description: [
@@ -148,6 +196,13 @@ export default {
         message: `文件上传失败`
       });
     },
+    selectFn(e) {
+      console.log(e.target.selectedIndex)
+      let index = e.target.selectedIndex;
+      this.form.inputparams = this.modelnames[index].inputparams;
+      this.form.outparams = this.modelnames[index].outparams;
+                    
+    },
     updateHandle (formName) {
         this.$refs[formName].validate(valid => {
           if (valid) {
@@ -186,7 +241,9 @@ export default {
           rawtype: this.form.type,
           taskname: this.form.taskname,
           rawurl: path,
-          description: this.form.description
+          description: this.form.description,
+          inputparams: JSON.stringify(this.form.inputparams),
+          outparams: JSON.stringify(this.form.outparams)
         };
         console.log(data);
         let vm = this;

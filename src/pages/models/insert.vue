@@ -37,15 +37,15 @@
       <el-button size="small">取消</el-button>
     </el-form-item>
     <el-row v-for="(item,index) in form.inputparams" :key="index" >
-      <el-form-item label="输入参数名" :prop="'inputparams.' + index + '.name'" :rules="[{ required: true, message: '参数名不能为空',trigger: 'change'},{max: 32, message: '不超过32个字符', trigger: 'change'}]">
+      <el-form-item label="输入参数名" :prop="'inputparams.' + index + '.name'" >
         <el-input v-model="item.name" placeholder="请输入参数名" style="width:200px"> </el-input>
       </el-form-item>
-      <el-form-item label="输入类型" :prop="'inputparams.' + index + '.type'" :rules="[{ required: true, message: '类型不能为空',trigger: 'change'}]">
+      <el-form-item label="输入类型" :prop="'inputparams.' + index + '.type'" >
         <select v-model="item.type" >
           <option v-for="type in options" >{{type}}</option>
         </select>
       </el-form-item>
-      <el-form-item label="输入缺省值" :prop="'inputparams.' + index + '.default'" :rules="[{ required: true, message: '缺省值不能为空',trigger: 'change'},{max: 32, message: '不超过32个字符', trigger: 'change'}]">
+      <el-form-item label="输入缺省值" :prop="'inputparams.' + index + '.default'" >
         <el-input v-model="item.default" placeholder="请输入缺省值" style="width:200px"> </el-input>
       </el-form-item>
       <el-button type="danger" v-if="form.inputparams.length > 1" size="medium" @click="removeRow(index)">删除</el-button>
@@ -53,11 +53,16 @@
     <el-button type="primary" size="medium" @click="addRow">新增输入参数</el-button>
 
     <el-row v-for="(item,index) in form.outputparams" :key="index+1" >
-      <el-form-item label="输出文件" :prop="'outputparams.' + index + '.name'" :rules="[{ required: true, message: '输出文件不能为空',trigger: 'change'},{max: 32, message: '不超过32个字符', trigger: 'change'}]">
-        <el-input v-model="item.name" placeholder="请输入输出文件" style="width:200px"> </el-input>
+      <el-form-item label="输出参数名" :prop="'outputparams.' + index + '.name'" >
+        <el-input v-model="item.name" placeholder="输出参数名" style="width:200px"> </el-input>
       </el-form-item>
-      <el-form-item label="输出文件名" :prop="'outputparams.' + index + '.value'" >
-        <el-input v-model="item.value" placeholder="请输入输出文件名" style="width:200px"> </el-input>
+      <el-form-item label="输出类型" :prop="'outputparams.' + index + '.type'" >
+        <select v-model="item.type" >
+          <option v-for="type in options" >{{type}}</option>
+        </select>
+      </el-form-item>
+      <el-form-item label="输出缺省值" :prop="'outputparams.' + index + '.default'" >
+        <el-input v-model="item.default" placeholder="请输入输出缺省值" style="width:200px"> </el-input>
       </el-form-item>
       <el-button type="danger" v-if="form.outputparams.length > 1" size="medium" @click="removeRow2(index)">删除</el-button>
     </el-row>
@@ -100,8 +105,9 @@ export default {
           ],
           outputparams:[
             {
-              name:'',              
-              value:''
+              name:'',
+              type:'',              
+              default:''
             }
           ],
 
@@ -241,7 +247,8 @@ export default {
     addRow2() {
       this.form.outputparams.push({
         name: "",
-        value: ""
+        type: "",
+        default: ""
       });
     },
     removeRow2(index) {
