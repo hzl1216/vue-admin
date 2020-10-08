@@ -107,7 +107,7 @@ export default {
         '.csv', '.tsv', '.xlsx'
       ],
       modelnames: [],
-      limitNum: 1,
+      limitNum: 100,
       formLabelWidth: '80px',
       fileList: [],
       form: {
