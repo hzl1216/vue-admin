@@ -10,7 +10,12 @@
             </thead>
             <tbody>
                 <tr v-for="item in items">
-                    <td v-for='value in item'>{{value}}</td>
+                    <td v-for='(value, key) in item'>
+                        <div>
+                        <div  v-if= ' shows[key]==0'>{{value}}</div>
+                        <button v-if = 'shows[key]==1' @click='download1(item[key])'>下载结果</button>
+                        </div>
+                    </td>
                     <el-button size="small" type="primary" @click="deleteobject(item)">执行</el-button>
                 </tr>
             </tbody>
@@ -37,7 +42,8 @@ export default {
             pageSize : 10, //每页显示20条数据
             currentPage : 1, //当前页码
             count : 0,
-            items: []
+            items: [],
+            shows: {'name':0,'description':0, 'model':0, 'outparams':1, 'status': 0, 'stdout': 0,'createdAt': 0, 'inputparams': 0, 'id':0,}
       }
   },
    created() {
@@ -45,6 +51,38 @@ export default {
             this.getList()
         } ,
   methods: {
+        download1 (paths) {
+            if(!sessionStorage.getItem('token')){
+              this.$router.push('/login');
+            }else{
+            for(path in paths){
+            let params = {
+                    params: {
+                        path: path.value
+                    }
+                };
+                console.log(params)
+                this.instance.download(params).then((res)=>{ 
+                  console.log(res.data)
+                  this.downloadfile(res.data,path.split("/").pop());
+                });
+            }
+            }
+        },
+        
+        downloadfile (data,fileName) {
+        if (!data) {
+            return
+        }
+        let url = window.URL.createObjectURL(new Blob([data]));
+        let link = document.createElement('a');
+        link.style.display = 'none';
+        link.href = url;
+        link.setAttribute('download',fileName);
+        document.body.appendChild(link);
+        link.click();
+        },
+        
         getList () {
                 let params = {
                     params: {
