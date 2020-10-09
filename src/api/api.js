@@ -7,6 +7,13 @@ const instance = axios.create({
     'Content-Type': 'application/json;charset=utf-8'
   }
 });
+const instance2 = axios.create({
+  timeout: 10000,
+  headers: {
+    'Content-Type': 'application/json;charset=utf-8' 
+  },
+  responseType: 'blob'
+});
  
 export default {
   userLogin (data, headers) {
@@ -127,6 +134,6 @@ export default {
     return instance.delete('/object/model/'+id);
   },
   download (params) {
-    return instance.get('/object/file/download', params);
+    return instance2.get('/object/file/download', params);
   },
 };
