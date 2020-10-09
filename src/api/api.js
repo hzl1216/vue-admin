@@ -126,4 +126,7 @@ export default {
   deleteModel(id) {
     return instance.delete('/object/model/'+id);
   },
+  download (params) {
+    return instance.get('/object/file/download', params);
+  },
 };
