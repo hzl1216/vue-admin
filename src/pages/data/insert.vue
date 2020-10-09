@@ -79,6 +79,11 @@ export default {
         }
     }
   },
+  created() {
+            //请求第一页数据
+            this.formData = new FormData()
+           
+        } ,
   methods: {
     selected: function(type) {
       this.type = type
@@ -94,7 +99,9 @@ export default {
     fileChange(file, fileList) {
       console.log('change')
       console.log(file)
+      
       this.form.file = file.raw
+      this.formData.append('file', file.raw)
       console.log(this.form.file)
       console.log(fileList)
     },

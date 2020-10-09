@@ -144,7 +144,7 @@ export default {
     },
     // 文件状态改变时的钩子
     fileChange(file, fileList) {
-       console.log('change')
+      console.log('change')
       console.log(file)
       
       this.form.file = file.raw

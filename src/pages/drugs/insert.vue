@@ -41,6 +41,11 @@ export default {
       fileList: []
     }
   },
+  created() {
+            //请求第一页数据
+            this.formData = new FormData()
+           
+        } ,
   methods: {
     // 文件超出个数限制时的钩子
     exceedFile(files, fileList) {
@@ -53,7 +58,9 @@ export default {
     fileChange(file, fileList) {
       console.log('change')
       console.log(file)
+      
       this.form.file = file.raw
+      this.formData.append('file', file.raw)
       console.log(this.form.file)
       console.log(fileList)
     },
