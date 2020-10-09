@@ -56,8 +56,8 @@ export default {
               this.$router.push('/login');
             }else{
             console.log(paths)
-            for(const path in paths){
-            
+            for(const path of paths){
+            console.log(path)
             let params = {
                     params: {
                         path: path.value
