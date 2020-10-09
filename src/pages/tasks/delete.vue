@@ -65,8 +65,7 @@ export default {
                 };
                 console.log(params)
                 this.instance.download(params).then((res)=>{ 
-                  console.log(res.data)
-                  this.downloadfile(res.data,path.split("/").pop());
+                  this.downloadfile(res.data,path.value.split("/").pop());
                 });
             }
             }
