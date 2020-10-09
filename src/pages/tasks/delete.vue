@@ -56,7 +56,7 @@ export default {
               this.$router.push('/login');
             }else{
             console.log(paths)
-            for(const path of paths){
+            for(const path of JSON.parse( paths)){
             console.log(path)
             let params = {
                     params: {
