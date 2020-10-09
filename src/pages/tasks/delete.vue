@@ -55,7 +55,9 @@ export default {
             if(!sessionStorage.getItem('token')){
               this.$router.push('/login');
             }else{
-            for(path in paths){
+            console.log(paths)
+            for(const path in paths){
+            
             let params = {
                     params: {
                         path: path.value
