@@ -88,7 +88,7 @@ export default {
       types: [
         'R', 'python'
       ],
-      limitNum: 1,
+      limitNum: 100,
       formLabelWidth: '80px',
       fileList: [],
       form: {
@@ -126,6 +126,11 @@ export default {
         }
     }
   },
+  created() {
+            //请求第一页数据
+            this.formData = new FormData()
+           
+        } ,
   methods: {
     selected: function(type) {
       this.type = type
@@ -139,9 +144,11 @@ export default {
     },
     // 文件状态改变时的钩子
     fileChange(file, fileList) {
-      console.log('change')
+       console.log('change')
       console.log(file)
+      
       this.form.file = file.raw
+      this.formData.append('file', file.raw)
       console.log(this.form.file)
       console.log(fileList)
     },
