@@ -13,7 +13,7 @@
                     <td v-for='(value, key) in item'>
                         <div>
                         <div  v-if= ' shows[key]==0'>{{value}}</div>
-                        <button v-if = 'shows[key]==1' @click='download1(item[key])'>下载结果</button>
+                        <button v-if = 'shows[key]==1 && item["status"]=="执行成功" ' @click='download1(item[key])'>下载结果</button>
                         </div>
                     </td>
                     <el-button size="small" type="primary" @click="deleteobject(item)">执行</el-button>
