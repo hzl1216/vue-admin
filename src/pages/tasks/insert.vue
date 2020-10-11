@@ -229,7 +229,7 @@ export default {
         title: '成功',
         message: `文件上传成功`
       });
-        }).catch(function (error) {
+        }).catch((error)=> {
                     this.$notify.error({
             title: error.response.data.error.id,
             message: error.response.data.error.message
@@ -257,7 +257,7 @@ export default {
             message: `添加成功`
           });
           console.log(res);
-        }).catch(function (error) {
+        }).catch((error)=> {
           this.$notify.error({
             title: error.response.data.error.id,
             message: error.response.data.error.message

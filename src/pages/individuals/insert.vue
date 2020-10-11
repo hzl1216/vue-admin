@@ -111,11 +111,14 @@ export default {
           this.filepath = res.data.path
           console.log(res);
           this.$notify.success({
-        title: '成功',
-        message: `文件上传成功`
-      });
-        }).catch(function (error) {
-          console.log(error);
+          title: '成功',
+          message: `文件上传成功`
+        });
+        }).catch((error)=> {
+          this.$notify.error({
+            title: error.response.data.error.id,
+            message: error.response.data.error.message
+          });
         });
     },
     updatedatabase() {
@@ -136,7 +139,7 @@ export default {
             message: `添加成功`
           });
           console.log(res);
-        }).catch(function (error) {
+        }).catch((error)=> {
           this.$notify.error({
             title: error.response.data.error.id,
             message: error.response.data.error.message
