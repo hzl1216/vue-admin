@@ -107,8 +107,11 @@ export default {
         title: '成功',
         message: `文件上传成功`
       });
-        }).catch(function (error) {
-          console.log(error);
+        }).catch((error)=> {
+          this.$notify.error({
+            title: error.response.data.error.id,
+            message: error.response.data.error.message
+        });
         });
     },
     updatedatabase() {
@@ -122,15 +125,14 @@ export default {
         const data = {
           path: this.filepath
         }
-        let vm = this;
         this.instance.insertTissues(data,  {'Content-Type': 'application/x-www-form-urlencoded'}).then(res => {
           this.$notify.success({
             title: '成功',
             message: `添加成功`
           });
           console.log(res);
-        }).catch(function (error) {
-          vm.$notify.error({
+        }).catch((error)=> {
+          this.$notify.error({
             title: error.response.data.error.id,
             message: error.response.data.error.message
         });
