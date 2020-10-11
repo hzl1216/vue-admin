@@ -222,8 +222,6 @@
             this.$store.commit('SET_USER', null);
             this.$router.replace({path: '/login'});
           });
-        }).catch(() => {
-          return false;
         })
       }
     }

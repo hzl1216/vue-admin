@@ -129,7 +129,6 @@ export default {
         const data = {
           path: this.filepath
         }
-        let vm = this;
         console.log(data)
         this.instance.insertDrugs(data,  {'Content-Type': 'application/x-www-form-urlencoded'}).then(res => {
           this.$notify.success({
@@ -138,7 +137,7 @@ export default {
           });
           console.log(res);
         }).catch(function (error) {
-          vm.$notify.error({
+          this.$notify.error({
             title: error.response.data.error.id,
             message: error.response.data.error.message
         });

@@ -230,7 +230,7 @@ export default {
         message: `文件上传成功`
       });
         }).catch(function (error) {
-                    vm.$notify.error({
+                    this.$notify.error({
             title: error.response.data.error.id,
             message: error.response.data.error.message
         });
@@ -251,7 +251,6 @@ export default {
           outparams: JSON.stringify(this.form.outparams)
         };
         console.log(data);
-        let vm = this;
         this.instance.insertTasks(data,  {'Content-Type': 'application/x-www-form-urlencoded'}).then(res => {
           this.$notify.success({
             title: '成功',
@@ -259,7 +258,7 @@ export default {
           });
           console.log(res);
         }).catch(function (error) {
-          vm.$notify.error({
+          this.$notify.error({
             title: error.response.data.error.id,
             message: error.response.data.error.message
         });

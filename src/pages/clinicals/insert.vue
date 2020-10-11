@@ -116,7 +116,7 @@ export default {
             message: `文件上传成功`
       });
         }).catch(function (error) {
-          vm.$notify.error({
+          this.$notify.error({
             title: error.response.data.error.id,
             message: error.response.data.error.message
         });
@@ -133,7 +133,6 @@ export default {
         const data = {
           path: this.filepath
         }
-        let vm = this;
         this.instance.insertClinicals(data,  {'Content-Type': 'application/x-www-form-urlencoded'}).then(res => {
           this.$notify.success({
             title: '成功',
@@ -141,7 +140,7 @@ export default {
           });
           console.log(res);
         }).catch(function (error) {
-          vm.$notify.error({
+          this.$notify.error({
             title: error.response.data.error.id,
             message: error.response.data.error.message
         });
