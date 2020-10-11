@@ -204,7 +204,10 @@ export default {
         message: `文件上传成功`
       });
         }).catch(function (error) {
-          console.log(error);
+                    vm.$notify.error({
+            title: error.response.data.error.id,
+            message: error.response.data.error.message
+        });
         });
     },
     updatedatabase() {
