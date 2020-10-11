@@ -216,7 +216,7 @@
             this.$store.commit('SET_TOKEN', '');
             this.$store.commit('SET_USER', null);
             this.$router.replace({path: '/login'});
-          }).catch(function (error) {
+          }).catch( (error)=> {
             console.log(error);
             this.$store.commit('SET_TOKEN', '');
             this.$store.commit('SET_USER', null);
