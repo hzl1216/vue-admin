@@ -126,7 +126,6 @@
         const headers = {
           'Content-Type': 'application/x-www-form-urlencoded'
         };
-        var vm = this;
         this.instance.userLogin(data, headers).then(res => {
           console.log(res.data)
           let user = res.data.userId;
@@ -134,8 +133,8 @@
           this.$store.commit('SET_USER', user);
           this.$store.commit('SET_TOKEN', token);
           this.$router.replace('home');
-        }).catch(function (error) {
-            vm.$notify.error({
+        }).catch((error)=> {
+            this.$notify.error({
             title: error.response.data.error.id,
             message: error.response.data.error.message
         });
