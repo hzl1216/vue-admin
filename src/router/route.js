@@ -15,7 +15,7 @@ export const loginRouter = {
   meta: {
     title: 'Login - 登录'
   },
-  component: () => import('src/pages/login/login')
+  component: () => import('src/components/upload/MultiFileUpload')
 };
 
 
