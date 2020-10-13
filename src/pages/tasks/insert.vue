@@ -70,27 +70,9 @@
       </select>
             <p>所选择：{{form.type}}</p>
     </el-form-item>
-    
-    <el-form-item label="上传数据文件"  style="width:300px">
-      <el-upload
-        ref="uploadExcel"
-        action="/object/file/upload"
-        :limit=limitNum
-        :auto-upload="false"
-        
-        :before-upload="beforeUploadFile"
-        :on-change="fileChange"
-        :on-exceed="exceedFile"
-        :on-success="handleSuccess"
-        :on-error="handleError"
-        :file-list="fileList">
-        <el-button size="small" plain>选择文件</el-button>
-      </el-upload>
-    </el-form-item>
-    <el-form-item>
-      <el-button size="small" type="primary" @click="uploadFile">立即上传</el-button>
-      <el-button size="small">取消</el-button>
-    </el-form-item>
+    <div>
+      <MultiFileUpload></MultiFileUpload>
+    </div>
     <el-form-item>
       <el-button size="small" type="primary" @click="updateHandle('form')">提交任务</el-button>
       <el-button size="small">取消</el-button>
@@ -100,7 +82,12 @@
 
 <script>
 import axios from 'axios'
+import MultiFileUpload from '../../components/upload/MultiFileUpload'
+
 export default {
+   components: {
+      MultiFileUpload
+  },
   data() {
     return {
       types: [
