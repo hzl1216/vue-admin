@@ -142,50 +142,7 @@ export default {
     selected: function(type) {
       this.type = type
     },
-    // 文件超出个数限制时的钩子
-    exceedFile(files, fileList) {
-      this.$notify.warning({
-        title: '警告',
-        message: `只能选择 ${this.limitNum} 个文件，当前共选择了 ${files.length + fileList.length} 个`
-      });
-    },
-    // 文件状态改变时的钩子
-    fileChange(file, fileList) {
-      console.log('change')
-      console.log(file)
-      
-      this.form.file = file.raw
-      this.formData.append('file', file.raw)
-      console.log(this.form.file)
-      console.log(fileList)
-    },
-    // 上传文件之前的钩子, 参数为上传的文件,若返回 false 或者返回 Promise 且被 reject，则停止上传
-    beforeUploadFile(file) {
-      console.log('before upload')
-      console.log(file)
-      let extension = file.name.substring(file.name.lastIndexOf('.')+1)
-      let size = file.size / 1024 / 1024
-    //   if(size > 10) {
-    //     this.$notify.warning({
-    //       title: '警告',
-    //       message: `文件大小不得超过10M`
-    //     });
-    //   }
-    },
-    // 文件上传成功时的钩子
-    handleSuccess(res, file, fileList) {
-      this.$notify.success({
-        title: '成功',
-        message: `文件上传成功`
-      });
-    },
-    // 文件上传失败时的钩子
-    handleError(err, file, fileList) {
-      this.$notify.error({
-        title: '错误',
-        message: `文件上传失败`
-      });
-    },
+    
     selectFn(e) {
       console.log(e.target.selectedIndex)
       let index = e.target.selectedIndex;
@@ -200,33 +157,11 @@ export default {
           }
         });
       },
-    uploadFile() {
-      if (!this.form.file) {
-        this.$notify.warning({
-          title: '警告',
-          message: `请选择文件`
-        });
-        return;
-      }
-
-      this.instance.upload(this.formData,  { "Content-Type": "multipart/form-data" }).then(res => {
-          this.filepath = res.data.path
-          console.log(res);
-          this.$notify.success({
-        title: '成功',
-        message: `文件上传成功`
-      });
-        }).catch((error)=> {
-                    this.$notify.error({
-            title: error.response.data.error.id,
-            message: error.response.data.error.message
-        });
-        });
-    },
+    
     updatedatabase() {
       let path = ''
         if(this.filepath){
-           path = this.filepath
+           path = this.filepath          
         }
         const data = {
           modelname: this.form.modelname,
@@ -237,6 +172,7 @@ export default {
           inputparams: JSON.stringify(this.form.inputparams),
           outparams: JSON.stringify(this.form.outparams)
         };
+      
         console.log(data);
         this.instance.insertTasks(data,  {'Content-Type': 'application/x-www-form-urlencoded'}).then(res => {
           this.$notify.success({

@@ -223,8 +223,8 @@
           },
           FileUploaded(up, file, info) {
             if (info.status == 200) {
-                console.log(info)
-                that.filepath = info.response.path
+//                console.log(info)
+                file.relativePath = JSON.parse(info.response)['path']
                 that.$notify.success({
                 title: '成功',
                 message: `文件上传成功`

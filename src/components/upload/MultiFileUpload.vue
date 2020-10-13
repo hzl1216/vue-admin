@@ -10,7 +10,7 @@
     <el-tag type="warning">不允许选取重复文件</el-tag>
     <br/>
     <br/>
-    <el-button type="primary" id="browse_button">选择多个文件</el-button>
+    <el-button type="primary" id="browse_button">选择文件</el-button>
     <br/>
     <el-table
       :data="tableData"
@@ -57,7 +57,8 @@
         files: [],
         up: {},
         server_config: "'/object/file/upload'",
-        tableData: []
+        tableData: [],
+        filepath: []
       }
     },
     watch: {
@@ -70,9 +71,19 @@
               size: e.size,
               status: e.status,
               id: e.id,
-              percent: e.percent
+              percent: e.percent,              
             });
+            if(e.status == 5){
+              this.filepath.push(
+                  e.relativePath          
+              );
+            }
+           
+            if(e.relativePath){
+              this.$emit('transferFilePath', this.filepath)
+            }
           });
+  
         },
         deep: true
       }
