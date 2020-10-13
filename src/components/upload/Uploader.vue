@@ -222,6 +222,14 @@
             }
           },
           FileUploaded(up, file, info) {
+            if (info.status == 200) {
+                console.log(info)
+                that.filepath = info.response.path
+                that.$notify.success({
+                title: '成功',
+                message: `文件上传成功`
+                });
+            }
             if (that.FileUploaded != null) {
               that.FileUploaded(up, file, info);
             }
@@ -237,9 +245,15 @@
             }
           },
           Error(up, args) {
+            console.log(args.response);
+            console.log(args.response.error);
+            that.$notify.error({
+            message: args.response
+        });
             if (that.Error != null) {
               that.Error(up, args);
             }
+
           },
           Destroy(up) {
             if (that.Destroy != null) {
