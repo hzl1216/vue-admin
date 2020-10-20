@@ -127,8 +127,8 @@ export default {
   deleteData(params) {
     return instance.delete('/object/data/',params);
   },
-  deleteDrug(id) {
-    return instance.delete('/object/drug/'+id);
+  deleteDrug(DrugName) {
+    return instance.delete('/object/drug/'+DrugName);
   },
   deleteModel(id) {
     return instance.delete('/object/model/'+id);

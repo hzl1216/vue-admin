@@ -2,18 +2,13 @@
     <div>
       <uploader
         browse_button="browse_button"
-        :url="server_config.url+'/File/'"
+        :url="'/object/file/upload'"
         :multi_selection="false"
         :FilesAdded="filesAdded"
-        :filters="{
-          mime_types : [
-            { title : 'Image files', extensions : 'jpg,gif,png' },
-            { title : 'Zip files', extensions : 'zip' }
-          ],
-          max_file_size : '400kb'
-        }"
+        :filters="{prevent_duplicates:true}"
         @inputUploader="inputUploader"
       />
+      <el-tag type="warning">不允许选取重复文件</el-tag>
       <el-button id="browse_button" type="primary">选择文件</el-button>
       <span v-for="file in files">{{file.name}}</span>
       <el-button type="danger" @click="uploadStart()">开始上传</el-button>
@@ -22,8 +17,6 @@
         <el-progress v-if="files.length>0" :text-inside="true" :stroke-width="20" :percentage="files[0].percent"></el-progress>
       </el-dialog>
       <br/>
-      <br/>
-      <el-tag type="warning">只允许上传图片和zip文件, 最大只能上传400kb的文件</el-tag>
     </div>
 </template>
 
@@ -33,7 +26,7 @@
     name: "SingleFileUpload",
     data() {
       return {
-        server_config: this.global.server_config,
+        server_config: "'/object/file/upload'",
         files:[],
         up: {},
         dialogTableVisible: false
