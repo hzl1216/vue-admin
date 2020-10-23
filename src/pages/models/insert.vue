@@ -87,14 +87,14 @@ export default {
           inputparams:[
             {
               name:'',
-              type:'',
+              type:'文件',
               default:''
             }
           ],
           outputparams:[
             {
               name:'',
-              type:'',              
+              type:'文件',              
               default:''
             }
           ],
