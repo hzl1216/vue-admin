@@ -174,7 +174,7 @@ export default {
     addRow() {
       this.form.inputparams.push({
         name: "",
-        type: "",
+        type: "文件",
         default: ""
       });
     },
@@ -186,7 +186,7 @@ export default {
     addRow2() {
       this.form.outputparams.push({
         name: "",
-        type: "",
+        type: "文件",
         default: ""
       });
     },
